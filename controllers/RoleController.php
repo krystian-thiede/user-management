@@ -32,7 +32,7 @@ class RoleController extends AdminDefaultController
 	{
 		$role = $this->findModel($id);
 
-		$authManager = new DbManager();
+		$authManager = AuthHelper::getDBManager();
 
 		$allRoles = Role::find()
 			->asArray()
@@ -72,7 +72,7 @@ class RoleController extends AdminDefaultController
 
 		$newChildRoles = Yii::$app->request->post('child_roles', []);
 
-		$children = (new DbManager())->getChildren($role->name);
+		$children = AuthHelper::getDBManager()->getChildren($role->name);
 
 		$oldChildRoles = [];
 
@@ -108,7 +108,7 @@ class RoleController extends AdminDefaultController
 
 		$newChildPermissions = Yii::$app->request->post('child_permissions', []);
 
-		$oldChildPermissions = array_keys((new DbManager())->getPermissionsByRole($role->name));
+		$oldChildPermissions = array_keys(AuthHelper::getDBManager()->getPermissionsByRole($role->name));
 
 		$toRemove = array_diff($oldChildPermissions, $newChildPermissions);
 		$toAdd = array_diff($newChildPermissions, $oldChildPermissions);

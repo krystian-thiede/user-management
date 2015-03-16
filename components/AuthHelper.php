@@ -20,6 +20,16 @@ class AuthHelper
 	const SESSION_PREFIX_ROUTES              = '__userRoutes';
 
 
+	public static function getDBManager()
+	{
+		return new DbManager([
+			'itemTable' => Yii::$app->getModule('user-management')->auth_item_table,
+			'itemChildTable' => Yii::$app->getModule('user-management')->auth_item_child_table,
+			'assignmentTable' => Yii::$app->getModule('user-management')->auth_assignment_table,
+			'ruleTable' => Yii::$app->getModule('user-management')->auth_rule_table,
+		]);
+	}
+
 	/**
 	 * Example how to handle layouts from config file
 	 *
@@ -112,7 +122,7 @@ class AuthHelper
 	{
 		touch(static::getPermissionsLastModFile());
 	}
-	
+
 	/**
 	 * Return route without baseUrl and start it with slash
 	 *
@@ -176,7 +186,7 @@ class AuthHelper
 	 */
 	public static function getChildrenByType($itemName, $childType)
 	{
-		$children = (new DbManager())->getChildren($itemName);
+		$children = self::getDBManager()->getChildren($itemName);
 
 		$result = [];
 

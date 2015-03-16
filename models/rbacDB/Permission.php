@@ -17,7 +17,7 @@ class Permission extends AbstractItem
 	 */
 	public static function getUserPermissions($userId)
 	{
-		return (new DbManager())->getPermissionsByUser($userId);
+		return AuthHelper::getDBManager()->getPermissionsByUser($userId);
 	}
 
 	/**

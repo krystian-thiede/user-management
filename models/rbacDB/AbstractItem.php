@@ -79,7 +79,7 @@ abstract class AbstractItem extends ActiveRecord
 
 		$childrenNames = (array) $childrenNames;
 
-		$dbManager = new DbManager();
+		$dbManager = AuthHelper::getDBManager();
 
 		foreach ($childrenNames as $childName)
 		{

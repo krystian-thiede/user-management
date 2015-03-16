@@ -18,7 +18,7 @@ class Role extends AbstractItem
 	 */
 	public static function getUserRoles($userId)
 	{
-		return (new DbManager())->getRolesByUser($userId);
+		return AuthHelper::getDBManager()->getRolesByUser($userId);
 	}
 
 	/**
@@ -31,7 +31,7 @@ class Role extends AbstractItem
 	 */
 	public static function getPermissionsByRole($roleName, $asArray = true)
 	{
-		$rbacPermissions = (new DbManager())->getPermissionsByRole($roleName);
+		$rbacPermissions = AuthHelper::getDBManager()->getPermissionsByRole($roleName);
 
 		$permissionNames = ArrayHelper::map($rbacPermissions, 'name', 'description');
 
